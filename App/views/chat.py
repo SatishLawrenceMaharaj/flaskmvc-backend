@@ -14,12 +14,12 @@ from App.controllers import (
 
 chat_views = Blueprint('chat_views', __name__, template_folder='../templates')
 
-# @chat_views.route('/api/chats/all', methods=['GET'])
-# def get_chats():
-#     chats = get_all_chats_json()
-#     if chats:
-#         return jsonify(chats)
-#     return jsonify([]), 200
+@chat_views.route('/api/chats', methods=['GET'])
+def get_chats():
+    chats = get_all_chats_json()
+    if chats:
+        return render_template('chats.html', chats=chats)
+    return render_template('chats.html', chats=[])
         
 @chat_views.route('/api/chats/all', methods=['GET'])
 def get_chats_action():
