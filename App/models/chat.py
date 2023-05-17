@@ -1,18 +1,17 @@
-import datetime
+from datetime import datetime
 from App.database import db
 
 class Chat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     chat_id = db.Column(db.String(120), nullable=False)
     chat_name = db.Column(db.String(120), nullable=False)
-    chat_message = db.Column(db.String(120), nullable=False)
-    chat_type = db.Column(db.String(120), nullable=False)
-    chat_description = db.Column(db.String(120), nullable=False)
-    chat_image = db.Column(db.String(120), nullable=False)
-    chat_created = db.Column(db.DateTime, nullable=False)
-    chat_creator_id = db.Column(db.String(120), nullable=False)
+    chat_type = db.Column(db.String(120), nullable=True)
+    chat_description = db.Column(db.String(120), nullable=True)
+    chat_image = db.Column(db.String(120), nullable=True)
+    chat_created = db.Column(db.DateTime, nullable=True)
+    chat_creator_id = db.Column(db.String(120), nullable=True)
     
-    def __init__(self, chat_id, chat_name, chat_type, chat_description, chat_image, chat_created, chat_creator_id):
+    def __init__(self, chat_id, chat_name, chat_type, chat_description, chat_image, chat_creator_id):
         self.chat_id = chat_id
         self.chat_name = chat_name
         self.chat_type = chat_type

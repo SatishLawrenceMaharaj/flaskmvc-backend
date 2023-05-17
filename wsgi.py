@@ -6,6 +6,8 @@ from App.database import create_db
 from App.main import app, migrate
 from App.controllers import ( create_user, get_all_users_json )
 
+from App.controllers.chat import *
+
 
 @app.cli.command("init")
 def initialize():
