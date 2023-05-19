@@ -1,0 +1,43 @@
+
+services:
+- type: web
+  name: flaskmvc_backend
+  env: python
+  repo: https://github.com/SatishLawrenceMaharaj/flaskmvc-backend.git
+  plan: free
+  branch: main
+  healthCheckPath: /healthcheck
+  buildCommand: "pip install -r requirements.txt"
+  startCommand: "gunicorn wsgi:app"
+  envVars:
+  - fromGroup: flaskmvc_backend-settings
+  - key: POSTGRES_URL
+    fromDatabase:
+      name: flaskmvc_backend-db
+      property: host
+  - key: POSTGRES_USER
+    fromDatabase:
+      name: flaskmvc_backend-db
+      property: user
+  - key: POSTGRES_PASSWORD
+    fromDatabase:
+      name: flaskmvc_backend-db
+      property: password
+  - key: POSTGRES_DB
+    fromDatabase:
+      name: flaskmvc_backend-db
+      property: database 
+
+envVarGroups:
+- name: flaskmvc_backend-settings
+  envVars:
+  - key: ENV
+    value: production
+  - key: FLASK_APP
+    value: wsgi.py
+    
+
+databases:
+- name: flaskmvc_backend-db
+  plan: free
+  databaseName: flaskmvc_backend
