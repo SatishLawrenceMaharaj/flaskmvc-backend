@@ -8,7 +8,7 @@ from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
 
 
-from App.database import init_db, get_migrate
+from App.database import init_db, get_migrate, create_db
 
 from App.controllers import (
     setup_jwt
@@ -55,7 +55,7 @@ def create_app(config={}):
     photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
     configure_uploads(app, photos)
     add_views(app, views)
-    init_db(app)
+    create_db(app)
     setup_jwt(app)
     app.app_context().push()
     return app
