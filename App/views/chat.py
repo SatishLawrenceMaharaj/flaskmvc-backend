@@ -4,6 +4,7 @@ from flask_jwt import jwt_required
 
 from App.controllers import ( 
     create_chat,
+    delete_chat,
     get_all_chats,
     get_all_chats_json,
     get_chat_by_id,
@@ -43,3 +44,12 @@ def create_chat_action():
     if new_chat:
         return jsonify(new_chat.to_json()), 201
     return jsonify({"message": "Chat could not be created"}), 400
+
+@chat_views.route("/api/chat/delete/<int:chat_id>", methods=["DELETE"])
+def delete_chat_action(chat_id):
+    chat = get_chat_by_id(chat_id)
+    if chat:
+        if delete_chat(chat_id):
+            return jsonify({"message": "Chat deleted"}), 200
+        return jsonify({"message": "Chat could not be deleted"}), 400
+    return jsonify({"message": "Chat not found"}), 404

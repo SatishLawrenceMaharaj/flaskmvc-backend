@@ -7,7 +7,7 @@ class Chat(db.Model):
     chat_name = db.Column(db.String(120), nullable=False)
     chat_type = db.Column(db.String(120), nullable=True)
     chat_description = db.Column(db.String(120), nullable=True)
-    chat_image = db.Column(db.String(120), nullable=True)
+    chat_image = db.Column(db.String, nullable=True)
     chat_created = db.Column(db.DateTime, nullable=True)
     chat_creator_id = db.Column(db.String(120), nullable=True)
     

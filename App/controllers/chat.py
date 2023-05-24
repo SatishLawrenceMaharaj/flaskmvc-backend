@@ -31,3 +31,11 @@ def create_chat(chat_id, chat_name, chat_type, chat_description, chat_image, cha
     db.session.add(chat)
     db.session.commit()
     return chat
+
+def delete_chat(id):
+    chat = get_chat_by_id(id)
+    if chat:
+        db.session.delete(chat)
+        db.session.commit()
+        return True
+    return None
