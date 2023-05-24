@@ -28,8 +28,6 @@ def get_chat_by_name_json(name):
 
 def create_chat(chat_id, chat_name, chat_type, chat_description, chat_image, chat_creator_id):
     chat = Chat(chat_id, chat_name, chat_type, chat_description, chat_image, chat_creator_id)
-    if chat:
-        db.session.add(chat)
-        db.session.commit()
-        return chat
-    return None
+    db.session.add(chat)
+    db.session.commit()
+    return chat
